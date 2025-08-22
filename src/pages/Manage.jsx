@@ -1,30 +1,44 @@
-import React from "react";
 import CategoryManager from "../components/CategoryManager.jsx";
 import TranslationManager from "../components/TranslationManager.jsx";
+import ImportExcel from "../components/ImportExcel.jsx";
 
+export default function Manage(props) {
+  const {
+    categories,
+    addCategory,
+    updateCategory,
+    deleteCategory,
+    translations,
+    addTranslation,
+    updateTranslation,
+    deleteTranslation,
+    deleteTranslationsByCategory,
+  } = props;
 
-export default function Manage(props){
-const { categories, addCategory, updateCategory, deleteCategory, translations, addTranslation, updateTranslation, deleteTranslation, deleteTranslationsByCategory } = props;
+  return (
+    <>
+      <CategoryManager
+        categories={categories}
+        addCategory={addCategory}
+        updateCategory={updateCategory}
+        deleteCategory={deleteCategory}
+        onCascadeDelete={deleteTranslationsByCategory}
+      />
 
+      <TranslationManager
+        categories={categories}
+        translations={translations}
+        addTranslation={addTranslation}
+        updateTranslation={updateTranslation}
+        deleteTranslation={deleteTranslation}
+      />
 
-return (
-<>
-<CategoryManager
-categories={categories}
-addCategory={addCategory}
-updateCategory={updateCategory}
-deleteCategory={deleteCategory}
-onCascadeDelete={deleteTranslationsByCategory}
-/>
+      <ImportExcel
 
-
-<TranslationManager
-categories={categories}
-translations={translations}
-addTranslation={addTranslation}
-updateTranslation={updateTranslation}
-deleteTranslation={deleteTranslation}
-/>
-</>
-);
+        addTranslation={addTranslation}
+        categories={categories}
+        setCategories={addCategory}
+      />
+    </>
+  );
 }
