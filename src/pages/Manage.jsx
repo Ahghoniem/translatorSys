@@ -37,7 +37,8 @@ export default function Manage(props) {
 
         addTranslation={addTranslation}
         categories={categories}
-        setCategories={addCategory}
+        addCategory={addCategory}
+        translations={translations}
       />
     </>
   );

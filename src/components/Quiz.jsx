@@ -1,19 +1,32 @@
 import React, { useMemo, useState } from "react";
 
+
+function shuffleArray(array) {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
+
+
 export default function Quiz({ translations, categories }) {
   const [categoryId, setCategoryId] = useState("");
   const today = new Date().toISOString().slice(0, 10);
   const [startDate, setStartDate] = useState(today);
   const [endDate, setEndDate] = useState(today);
 
-  const pool = useMemo(() => {
-    return translations.filter(
-      (t) =>
-        (!categoryId || t.categoryId === categoryId) &&
-        (!startDate || t.startDate >= startDate) &&
-        (!endDate || t.startDate <= endDate)
-    );
-  }, [translations, categoryId, startDate, endDate]);
+const pool = useMemo(() => {
+  const filtered = translations.filter(
+    (t) =>
+      (!categoryId || t.categoryId === categoryId) &&
+      (!startDate || t.startDate >= startDate) &&
+      (!endDate || t.startDate <= endDate)
+  );
+  return shuffleArray(filtered); 
+}, [translations, categoryId, startDate, endDate]);
+
 
   const [index, setIndex] = useState(0);
   const [answer, setAnswer] = useState("");
