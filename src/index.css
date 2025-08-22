@@ -151,3 +151,79 @@ select,
 .form .full {
   grid-column: 1 / -1;
 }
+
+@media (max-width: 600px) {
+  .category-card {
+    display: block;
+    width: 100%;
+    margin-bottom: 16px;
+  }
+
+  .category-row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .category-row > div[data-label="Name"] {
+    flex: 1 1 100%;
+  }
+
+  .category-row > div[data-label="Actions"] {
+    flex: 1 1 100%;
+    display: flex;
+    gap: 8px;
+    justify-content: flex-start;
+  }
+
+  .category-card [data-label] {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4px;
+  }
+}
+
+
+@media (max-width: 600px) {
+  .table,
+  .table thead,
+  .table tbody,
+  .table th,
+  .table td,
+  .table tr {
+    display: block;
+    width: 100%;
+  }
+
+  .table thead {
+    display: none; /* hide headers */
+  }
+
+  .table tr {
+    margin-bottom: 16px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px;
+    background: var(--panel);
+  }
+
+  .table td {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+  }
+
+  .table td::before {
+    content: attr(data-label); /* label from HTML attribute */
+    font-weight: bold;
+    color: var(--muted);
+  }
+
+  .table td:last-child {
+    justify-content: flex-end; /* for actions buttons */
+    gap: 8px;
+  }
+
+}
