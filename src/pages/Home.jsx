@@ -5,7 +5,7 @@ export default function Home() {
     <section className="panel">
       <h2 className="section-title">Welcome</h2>
       <p>
-        Use <strong>Manage</strong> to create <em>Categories</em> and{" "}
+        Use <strong>Manage</strong> to create <em>Categoriesssssss</em> and{" "}
         <em>Translations</em>. Each translation automatically gets a{" "}
         <span className="badge">startDate</span> (today).
       </p>
