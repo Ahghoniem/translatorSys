@@ -139,41 +139,26 @@ export default function TranslationManager({
               <th>Actions</th>
             </tr>
           </thead>
-          <tbody>
-            {translations.length === 0 && (
-              <tr>
-                <td colSpan="6" style={{ color: "var(--muted)" }}>
-                  No items yet.
-                </td>
-              </tr>
-            )}
-            {translations.map((t, i) => (
-              <tr key={t.id}>
-                <td>{i + 1}</td>
-                <td>{t.expression}</td>
-                <td>{t.word}</td>
-                <td>
-                  <span className="badge">
-                    {byCatName[t.categoryId] || "—"}
-                  </span>
-                </td>
-                <td>{t.startDate}</td>
-                <td>
-                  <div className="row">
-                    <button className="btn" onClick={() => startEdit(t)}>
-                      Edit
-                    </button>
-                    <button
-                      className="btn danger"
-                      onClick={() => deleteTranslation(t.id)}
-                    >
-                      Delete
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
+         <tbody>
+  {translations.map((t, i) => (
+    <tr key={t.id}>
+      <td data-label="#"> {i + 1} </td>
+      <td data-label="Expression">{t.expression}</td>
+      <td data-label="Answer">{t.word}</td>
+      <td data-label="Category">
+        <span className="badge">{byCatName[t.categoryId] || "—"}</span>
+      </td>
+      <td data-label="Start Date">{t.startDate}</td>
+      <td data-label="Actions">
+        <div className="row">
+          <button className="btn" onClick={() => startEdit(t)}>Edit</button>
+          <button className="btn danger" onClick={() => deleteTranslation(t.id)}>Delete</button>
+        </div>
+      </td>
+    </tr>
+  ))}
+</tbody>
+
         </table>
       </div>
     </section>
