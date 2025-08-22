@@ -1,5 +1,9 @@
 {
   "appId": "com.example.app",
   "appName": "translator",
-  "webDir": "dist"
+  "webDir": "dist",
+  "server": {
+        "url": "https://translator-sys.vercel.app",
+        "cleartext": true
+    }
 }
