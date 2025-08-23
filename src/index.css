@@ -226,4 +226,25 @@ select,
     gap: 8px;
   }
 
+  .table td[data-label="Actions"] {
+    display: flex;         
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .table td[data-label="Actions"]::before {
+    content: "Actions";    
+    margin-right: 8px;
+    font-weight: bold;
+    color: var(--muted);
+  }
+
+  .actions {
+    display: flex;
+    gap: 8px;
+  } /* left-align instead of spread */
 }
+
+
+
+

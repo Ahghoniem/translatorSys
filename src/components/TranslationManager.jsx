@@ -136,29 +136,37 @@ export default function TranslationManager({
               <th>Answer</th>
               <th>Category</th>
               <th>Start Date</th>
-              <th>Actions</th>
+              <th  >Actions</th>
             </tr>
           </thead>
-         <tbody>
-  {translations.map((t, i) => (
-    <tr key={t.id}>
-      <td data-label="#"> {i + 1} </td>
-      <td data-label="Expression">{t.expression}</td>
-      <td data-label="Answer">{t.word}</td>
-      <td data-label="Category">
-        <span className="badge">{byCatName[t.categoryId] || "—"}</span>
-      </td>
-      <td data-label="Start Date">{t.startDate}</td>
-      <td data-label="Actions">
-        <div className="row">
-          <button className="btn" onClick={() => startEdit(t)}>Edit</button>
-          <button className="btn danger" onClick={() => deleteTranslation(t.id)}>Delete</button>
-        </div>
-      </td>
-    </tr>
-  ))}
-</tbody>
-
+          <tbody>
+            {translations.map((t, i) => (
+              <tr key={t.id}>
+                <td data-label="#"> {i + 1} </td>
+                <td data-label="Expression">{t.expression}</td>
+                <td data-label="Answer">{t.word}</td>
+                <td data-label="Category">
+                  <span className="badge">
+                    {byCatName[t.categoryId] || "—"}
+                  </span>
+                </td>
+                <td data-label="Start Date">{t.startDate}</td>
+                <td data-label="Actions">
+                  <div className="actions">
+                    <button className="btn" onClick={() => startEdit(t)}>
+                      Edit
+                    </button>
+                    <button
+                      className="btn danger"
+                      onClick={() => deleteTranslation(t.id)}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       </div>
     </section>
