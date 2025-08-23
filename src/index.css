@@ -198,7 +198,7 @@ select,
   }
 
   .table thead {
-    display: none; /* hide headers */
+    display: none;
   }
 
   .table tr {
@@ -216,13 +216,13 @@ select,
   }
 
   .table td::before {
-    content: attr(data-label); /* label from HTML attribute */
+    content: attr(data-label); 
     font-weight: bold;
     color: var(--muted);
   }
 
   .table td:last-child {
-    justify-content: flex-end; /* for actions buttons */
+    justify-content: flex-end;
     gap: 8px;
   }
 
@@ -242,7 +242,7 @@ select,
   .actions {
     display: flex;
     gap: 8px;
-  } /* left-align instead of spread */
+  } 
 }
 
 

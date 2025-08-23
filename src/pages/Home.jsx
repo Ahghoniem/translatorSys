@@ -3,26 +3,23 @@ import React from "react";
 export default function Home() {
   return (
     <section className="panel">
-      <h2 className="section-title">Welcome</h2>
+      <h2 className="section-title">Welcome to Your Translation App</h2>
       <p>
-        Use <strong>Manage</strong> to create <em>Categoriesssssss</em> and{" "}
-        <em>Translations</em>. Each translation automatically gets a{" "}
-        <span className="badge">startDate</span> (today).
+        Use the <strong>Manage</strong> tab to create <em>Categories</em> and <em>Translations</em>.
+        Each translation is automatically assigned a <span className="badge">startDate</span> set to today.
       </p>
       <p>
-        Use <strong>Quiz</strong> to practice. Pick a category and a date range
-        to filter the questions.
+        The <strong>Quiz</strong> tab lets you practice. Select a category and a date range to filter the questions.
       </p>
       <ul>
-        <li>All data is saved locally in your browser (no backend).</li>
-        <li>Deleting a category removes translations assigned to it.</li>
-        <li>You can edit any item inline.</li>
+        <li>All your data is stored locally in your browser—no backend required.</li>
+        <li>Deleting a category will also remove all translations associated with it.</li>
+        <li>You can edit any item inline for quick updates.</li>
       </ul>
       <div className="panel">
-        <div className="label">Tip</div>
+        <div className="label">Quick Tip</div>
         <p>
-          Hit <span className="kbd">Enter</span> in the answer input to check
-          quickly.
+          Press <span className="kbd">Enter</span> in the answer input to check your answer immediately.
         </p>
       </div>
     </section>

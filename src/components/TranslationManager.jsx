@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useRef } from "react";
 
 export default function TranslationManager({
   categories,
@@ -14,6 +14,8 @@ export default function TranslationManager({
   });
   const [editingId, setEditingId] = useState(null);
 
+  const rowRefs = useRef({});
+
   const byCatName = useMemo(
     () => Object.fromEntries(categories.map((c) => [c.id, c.name])),
     [categories]
@@ -21,8 +23,8 @@ export default function TranslationManager({
 
   const onSubmit = (e) => {
     e.preventDefault();
-    if (!form.expression.trim() || !form.word.trim() || !form.categoryId)
-      return;
+    if (!form.expression.trim() || !form.word.trim() || !form.categoryId) return;
+
     addTranslation({
       expression: form.expression.trim(),
       word: form.word.trim(),
@@ -38,15 +40,27 @@ export default function TranslationManager({
       word: t.word,
       categoryId: t.categoryId,
     });
+
+    document.getElementById("translation-form")?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
   };
+
   const saveEdit = () => {
-    if (!form.expression.trim() || !form.word.trim() || !form.categoryId)
-      return;
+    if (!form.expression.trim() || !form.word.trim() || !form.categoryId) return;
+
     updateTranslation(editingId, {
       expression: form.expression.trim(),
       word: form.word.trim(),
       categoryId: form.categoryId,
     });
+
+    rowRefs.current[editingId]?.scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+    });
+
     setEditingId(null);
     setForm({ expression: "", word: "", categoryId: "" });
   };
@@ -58,6 +72,7 @@ export default function TranslationManager({
       </h2>
 
       <form
+        id="translation-form"
         onSubmit={
           editingId
             ? (e) => {
@@ -136,19 +151,20 @@ export default function TranslationManager({
               <th>Answer</th>
               <th>Category</th>
               <th>Start Date</th>
-              <th  >Actions</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
             {translations.map((t, i) => (
-              <tr key={t.id}>
-                <td data-label="#"> {i + 1} </td>
+              <tr
+                key={t.id}
+                ref={(el) => (rowRefs.current[t.id] = el)} 
+              >
+                <td data-label="#">{i + 1}</td>
                 <td data-label="Expression">{t.expression}</td>
                 <td data-label="Answer">{t.word}</td>
                 <td data-label="Category">
-                  <span className="badge">
-                    {byCatName[t.categoryId] || "—"}
-                  </span>
+                  <span className="badge">{byCatName[t.categoryId] || "—"}</span>
                 </td>
                 <td data-label="Start Date">{t.startDate}</td>
                 <td data-label="Actions">

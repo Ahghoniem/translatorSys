@@ -1,6 +1,5 @@
 import React, { useMemo, useState } from "react";
 
-
 function shuffleArray(array) {
   const shuffled = [...array];
   for (let i = shuffled.length - 1; i > 0; i--) {
@@ -10,27 +9,26 @@ function shuffleArray(array) {
   return shuffled;
 }
 
-
 export default function Quiz({ translations, categories }) {
   const [categoryId, setCategoryId] = useState("");
   const today = new Date().toISOString().slice(0, 10);
   const [startDate, setStartDate] = useState(today);
   const [endDate, setEndDate] = useState(today);
 
-const pool = useMemo(() => {
-  const filtered = translations.filter(
-    (t) =>
-      (!categoryId || t.categoryId === categoryId) &&
-      (!startDate || t.startDate >= startDate) &&
-      (!endDate || t.startDate <= endDate)
-  );
-  return shuffleArray(filtered); 
-}, [translations, categoryId, startDate, endDate]);
-
+  const pool = useMemo(() => {
+    const filtered = translations.filter(
+      (t) =>
+        (!categoryId || t.categoryId === categoryId) &&
+        (!startDate || t.startDate >= startDate) &&
+        (!endDate || t.startDate <= endDate)
+    );
+    return shuffleArray(filtered);
+  }, [translations, categoryId, startDate, endDate]);
 
   const [index, setIndex] = useState(0);
   const [answer, setAnswer] = useState("");
   const [feedback, setFeedback] = useState("");
+
   const current = pool[index] || null;
 
   const check = () => {
@@ -45,9 +43,18 @@ const pool = useMemo(() => {
   const next = () => {
     setAnswer("");
     setFeedback("");
-    if (pool.length > 0) {
-      setIndex((index + 1) % pool.length);
+
+    if (index < pool.length - 1) {
+      setIndex(index + 1);
+    } else {
+      setIndex(pool.length);
     }
+  };
+
+  const restart = () => {
+    setIndex(0);
+    setAnswer("");
+    setFeedback("");
   };
 
   return (
@@ -101,6 +108,15 @@ const pool = useMemo(() => {
 
       {pool.length === 0 ? (
         <div className="panel">No questions found with these filters.</div>
+      ) : index >= pool.length ? (
+        <div className="panel">
+          🎉 Quiz Finished! You have completed all questions.
+          <div style={{ marginTop: 12 }}>
+            <button className="btn primary" onClick={restart}>
+              Restart Quiz
+            </button>
+          </div>
+        </div>
       ) : (
         <div className="panel">
           <div className="label">Expression</div>
@@ -125,6 +141,7 @@ const pool = useMemo(() => {
               Next
             </button>
           </div>
+
           {feedback && <div style={{ marginTop: 6 }}>{feedback}</div>}
           <div className="label" style={{ marginTop: 6 }}>
             Pool: {pool.length} items
@@ -134,3 +151,4 @@ const pool = useMemo(() => {
     </section>
   );
 }
+
